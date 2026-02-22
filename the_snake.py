@@ -85,7 +85,7 @@ class GameObject:
 class Apple(GameObject):
     """Class representing the apple that the snake eats."""
 
-    def __init__(self, occupied_positions=[], body_color=APPLE_COLOR):
+    def __init__(self, occupied_positions=None, body_color=APPLE_COLOR):
         """
         Initialize an apple with a color and a random position.
 
@@ -94,6 +94,8 @@ class Apple(GameObject):
             Defaults to APPLE_COLOR.
         """
         super().__init__(body_color)
+        if occupied_positions is None:
+            occupied_positions = []
         self.randomize_position(occupied_positions)
 
     def randomize_position(self, occupied_positions):
@@ -112,7 +114,7 @@ class Apple(GameObject):
         """
         total_cells = GRID_WIDTH * GRID_HEIGHT
         if len(occupied_positions) >= total_cells:
-            raise Exception("No free cells on board")
+            raise Exception('No free cells on board')
         while True:
             x_pos = randint(0, GRID_WIDTH - 1) * GRID_SIZE
             y_pos = randint(0, GRID_HEIGHT - 1) * GRID_SIZE
